@@ -11,9 +11,8 @@ export class LoanRequestsController {
   constructor(private readonly service: LoanRequestsService) {}
 
   @Get()
-  findAll() {
-    // TODO BACK-A: recibir la consulta con @Query, validarla con el pipe y pasar el filtro.
-    return this.service.findAll();
+  findAll(@Query(requestValidationPipe) query: ListLoanRequestsDto) {
+    return this.service.findAll(query.toolId);
   }
 
   @Get(":id")
