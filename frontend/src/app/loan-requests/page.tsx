@@ -10,7 +10,13 @@ export default async function LoanRequestsPage({ searchParams }: LoanRequestsPag
   const tools: Tool[] = toolsResponse.ok ? await toolsResponse.json() : [];
 
   const { toolId } = await searchParams;
-  const 
+  const selectedToolId = toolId?.trim() ?? "";
+  const path = selectedToolId 
+  ? "/loan-requests?toolId=${encodeURIComponent (selectedToolId)}"
+  :  " /loan-requests";
+
+  const response = await apiFetch(path);
+  const request: LoanRequest [] = response.ok ? await response.json() :[];
 
   return (
     <main>
